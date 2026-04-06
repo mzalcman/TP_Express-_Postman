@@ -1,22 +1,43 @@
-import express from "express"; // hacer npm i express
-import cors from "cors"; // hacer npm i cors
+import express from "express";
+import cors from "cors";
+
 const app = express();
-const port = 3000; // El puerto 3000 (http://localhost:3000)
+const port = 5000;
+
 // Agrego los Middlewares
 app.use(cors()); // Middleware de CORS
 app.use(express.json()); // Middleware para parsear y comprender JSON
-//
-// Aca pongo todos los EndPoints
-//
+
+
 app.get('/', (req, res) => { // EndPoint "/"
-res.send('Ya estoy respondiendo!');
+    res.status(200).send('Ya estoy respondiendo!');
 })
-app.get('/saludar', (req, res) => { // EndPoint "/saludar"
-res.send('Hello World!');
+
+app.get('/saludar/:nombre', (req, res) => { // EndPoint "/saludar"
+    res.status(200).send(`Hola ${req.params.nombre}`);
 })
+
+app.get('/validarfecha/:ano/:mes/:dia', (req, res) => { // EndPoint "/saludar"
+    const { ano, mes, dia } = req.params;
+
+    // Armamos la fecha en formato válido
+    const fecha = `${ano}-${mes}-${dia}`;
+
+    // Validamos con Date.parse
+    if (isNaN(Date.parse(fecha))) {
+        return res.status(400).send("Fecha inválida");
+    }
+
+    res.status(200).send("Fecha válida")
+})
+
+
+
+
+
 //
 // Inicio el Server y lo pongo a escuchar.
 //
 app.listen(port, () => {
-console.log(`Example app listening on port ${port}`)
+    console.log(`Example app listening on port ${port}`)
 })
