@@ -1,6 +1,9 @@
 import express from "express";
 import cors from "cors";
 import { sumar, restar, multiplicar, dividir } from "./modules/matematica.js";
+import { OMDBSearchByPage, OMDBSearchComplete, OMDBGetByImdbID } from "./modules/omdb-wrapper.js";
+import { Alumno } from "./models/alumno.js";
+
 
 const app = express();
 const port = 5000;
@@ -79,4 +82,52 @@ app.get("/matematica/dividir/:n1/:n2", (req, res) => {
     const resultado = dividir(n1, n2);
 
     res.status(200).json({ resultado });
+});
+
+app.get("/omdb/searchbypage/:search/:p", async (req, res) => {
+    const search = req.params.search;
+    const page = Number(req.params.p);
+
+    const resultado = await OMDBSearchByPage(search, page);
+
+    res.status(200).json({
+        respuesta: resultado.respuesta,
+        cantidadTotal: resultado.cantidadTotal,
+        datos: resultado.datos
+    });
+});
+
+
+app.get("/omdb/searchcomplete/:search", async (req, res) => {
+    const search = req.params.search;
+
+    const resultado = await OMDBSearchComplete(search);
+
+    res.status(200).json({
+        respuesta: resultado.respuesta,
+        cantidadTotal: resultado.cantidadTotal,
+        datos: resultado.datos
+    });
+});
+
+
+app.get("/omdb/getbyomdbid/:id", async (req, res) => {
+    const imdbID = req.params.id;
+
+    const resultado = await OMDBGetByImdbID(imdbID);
+
+    res.status(200).json({
+        respuesta: resultado.respuesta,
+        cantidadTotal: resultado.cantidadTotal,
+        datos: resultado.datos 
+    });
+});
+
+const alumnosArray = [];
+alumnosArray.push(new Alumno("Esteban Dido" , "22888444", 20));
+alumnosArray.push(new Alumno("Matias Queroso", "28946255", 51));
+alumnosArray.push(new Alumno("Elba Calao" , "32623391", 18));
+
+app.get("/alumnos", (req, res) => {
+    res.status(200).json(alumnosArray);
 });
