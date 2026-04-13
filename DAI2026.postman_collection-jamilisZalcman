@@ -1,0 +1,323 @@
+{
+	"info": {
+		"_postman_id": "fd8e7c2b-71c6-4fb0-874d-e864431b145f",
+		"name": "DAI2026",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "TP_Express_Postman",
+			"item": [
+				{
+					"name": "Endpoints Comunes A1",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:{{port}}/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "{{port}}",
+							"path": [
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Endpoints Comunes A2",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:{{port}}/saludar/eliel",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "{{port}}",
+							"path": [
+								"saludar",
+								"eliel"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Endpoints Comunes A3",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:{{port}}/validarfecha/2024/10/25",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "{{port}}",
+							"path": [
+								"validarfecha",
+								"2024",
+								"10",
+								"25"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Endpoints Matemática B1",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:{{port}}/matematica/sumar/1/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "{{port}}",
+							"path": [
+								"matematica",
+								"sumar",
+								"1",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Endpoints Matemática B2",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:{{port}}/matematica/restar/4/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "{{port}}",
+							"path": [
+								"matematica",
+								"restar",
+								"4",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Endpoints Matemática B3",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:{{port}}/matematica/multiplicar/4/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "{{port}}",
+							"path": [
+								"matematica",
+								"multiplicar",
+								"4",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Endpoints Matemática B4",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:{{port}}/matematica/dividir/4/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "{{port}}",
+							"path": [
+								"matematica",
+								"dividir",
+								"4",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Endpoints  Omdb-Wrapper C1",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:{{port}}/omdb/searchbypage/cars/6",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "{{port}}",
+							"path": [
+								"omdb",
+								"searchbypage",
+								"cars",
+								"6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Endpoints  Omdb-Wrapper C2",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:{{port}}/omdb/searchcomplete/cars",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "{{port}}",
+							"path": [
+								"omdb",
+								"searchcomplete",
+								"cars"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Endpoints  Omdb-Wrapper C3",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:{{port}}/omdb/getbyomdbid/tt20297790",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "{{port}}",
+							"path": [
+								"omdb",
+								"getbyomdbid",
+								"tt20297790"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Endpoints Alumno D1",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:{{port}}/alumnos",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "{{port}}",
+							"path": [
+								"alumnos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Endpoints Alumno D2",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:{{port}}/alumnos/22888444",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "{{port}}",
+							"path": [
+								"alumnos",
+								"22888444"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Endpoints Alumno D3",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "username",
+									"value": "Eliel J",
+									"type": "text"
+								},
+								{
+									"key": "dni",
+									"value": "49086719",
+									"type": "text"
+								},
+								{
+									"key": "edad",
+									"value": "25"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:{{port}}/alumnos",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "{{port}}",
+							"path": [
+								"alumnos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Endpoints Alumno D4",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:{{port}}/alumnos",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "{{port}}",
+							"path": [
+								"alumnos"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

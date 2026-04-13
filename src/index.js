@@ -142,6 +142,8 @@ app.get("/alumnos/:dni", (req, res) => {
     return res.status(404).json({ error: "Alumno no encontrado" });
 });
 
+app.use(express.urlencoded({ extended: true }));
+
 app.post("/alumnos", (req, res) => {
     const { username, dni, edad } = req.body;
 
