@@ -3,6 +3,8 @@ import cors from "cors";
 import { sumar, restar, multiplicar, dividir } from "./modules/matematica.js";
 import { OMDBSearchByPage, OMDBSearchComplete, OMDBGetByImdbID } from "./modules/omdb-wrapper.js";
 import Alumno from "./models/alumno.js";
+import ValidacionesHelper from './modules/validaciones-helper.js';
+import DateTimeHelper     from './modules/datetime-helper.js';
 
 
 const app = express();
@@ -162,6 +164,7 @@ app.post("/alumnos", (req, res) => {
     return res.status(201).json(nuevoAlumno);
 });
 
+app.use(express.json());
 app.delete("/alumnos", (req, res) => {
     const { dni } = req.body;
 
