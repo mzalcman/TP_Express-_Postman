@@ -34,10 +34,10 @@ class ValidacionesHelper {
 
   isEmail = (value) => 
     {
-        if (!value) return false;
+      if (!value) return false;
 
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(value);
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      return emailRegex.test(value);
     };
 
 }

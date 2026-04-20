@@ -21,7 +21,9 @@ app.get('/', (req, res) => {
 })
 
 app.get('/saludar/:nombre', (req, res) => {
-    res.status(200).send(`Hola ${req.params.nombre}`);
+    const nombre = ValidacionesHelper.getStringOrDefault(req.params.nombre, 'Anónimo');
+
+    res.status(200).send(`Hola ${nombre}`);
 })
 
 app.get('/validarfecha/:ano/:mes/:dia', (req, res) => { 
