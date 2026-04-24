@@ -26,18 +26,28 @@ app.get('/saludar/:nombre', (req, res) => {
     res.status(200).send(`Hola ${nombre}`);
 })
 
-app.get('/validarfecha/:ano/:mes/:dia', (req, res) => { 
-    const { ano, mes, dia } = req.params;
+app.get('/validarfecha/:ano/:mes/:dia', (req, res) => {
 
-    const fecha = `${ano}-${mes}-${dia}`;
+    const ano = ValidacionesHelper.getIntegerOrDefault(req.params.ano, 0);
+    const mes = ValidacionesHelper.getIntegerOrDefault(req.params.mes, 0);
+    const dia = ValidacionesHelper.getIntegerOrDefault(req.params.dia, 0);
 
-    if (isNaN(Date.parse(fecha))) {
+    if (ano === 0 || mes === 0 || dia === 0) {
+        return res.status(400).send("Parámetros inválidos");
+    }
+
+    const fecha = new Date(ano, mes - 1, dia);
+
+    if (
+        fecha.getFullYear() !== ano ||
+        fecha.getMonth() !== mes - 1 ||
+        fecha.getDate() !== dia
+    ) {
         return res.status(400).send("Fecha inválida");
     }
 
-    res.status(200).send("Fecha válida")
-})
-
+    res.status(200).send("Fecha válida");
+});
 
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`)
@@ -45,8 +55,12 @@ app.listen(port, () => {
 
 // Endpoints matemática.js
 app.get("/matematica/sumar/:n1/:n2", (req, res) => {
-    const n1 = Number(req.params.n1);
-    const n2 = Number(req.params.n2);
+    const n1 = ValidacionesHelper.getIntegerOrDefault(req.params.n1, null);
+    const n2 = ValidacionesHelper.getIntegerOrDefault(req.params.n2, null);
+
+    if (n1 === null || n2 === null) {
+        return res.status(400).send("n1 y n2 deben ser números");
+    }
 
     const resultado = sumar(n1, n2);
 

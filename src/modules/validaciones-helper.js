@@ -2,13 +2,21 @@ class ValidacionesHelper {
 
   getIntegerOrDefault = (value, defaultValue) =>
     { 
-        const num = parseInt(value);
-        return isNaN(num) ? defaultValue : num;
+        if (value === undefined || value === null) return defaultValue;
+
+        const str = String(value).trim();
+
+        if (!/^-?\d+$/.test(str)) {
+          return defaultValue;
+        }
+
+      return Number(str);
     };
 
   getStringOrDefault = (value, defaultValue) =>
     {
         if (value === undefined || value === null) return defaultValue;
+        if (value.trim() == "") return defaultValue;
         return String(value);
     };
 
