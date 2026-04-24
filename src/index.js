@@ -100,8 +100,12 @@ app.get("/matematica/dividir/:n1/:n2", (req, res) => {
 
 // Endpoints omdb-wrapper.js
 app.get("/omdb/searchbypage/:search/:p", async (req, res) => {
-    const search = req.params.search;
-    const page = Number(req.params.p);
+    const search = ValidacionesHelper.getStringOrDefault(req.params.search, "");
+    const page   = ValidacionesHelper.getIntegerOrDefault(req.params.p, 1);
+
+    if (search === "") {
+        return res.status(400).send("search es obligatorio");
+    }
 
     const resultado = await OMDBSearchByPage(search, page);
 
@@ -113,8 +117,13 @@ app.get("/omdb/searchbypage/:search/:p", async (req, res) => {
 });
 
 
+
 app.get("/omdb/searchcomplete/:search", async (req, res) => {
-    const search = req.params.search;
+    const search = ValidacionesHelper.getStringOrDefault(req.params.search, "");
+
+    if (search === "") {
+        return res.status(400).send("search es obligatorio");
+    }
 
     const resultado = await OMDBSearchComplete(search);
 
@@ -126,15 +135,21 @@ app.get("/omdb/searchcomplete/:search", async (req, res) => {
 });
 
 
+
+
 app.get("/omdb/getbyomdbid/:id", async (req, res) => {
-    const imdbID = req.params.id;
+    const imdbID = ValidacionesHelper.getStringOrDefault(req.params.id, "");
+
+    if (imdbID === "") {
+        return res.status(400).send("imdbID es obligatorio");
+    }
 
     const resultado = await OMDBGetByImdbID(imdbID);
 
     res.status(200).json({
         respuesta: resultado.respuesta,
         cantidadTotal: resultado.cantidadTotal,
-        datos: resultado.datos 
+        datos: resultado.datos
     });
 });
 
@@ -149,40 +164,52 @@ app.get("/alumnos", (req, res) => {
 });
 
 app.get("/alumnos/:dni", (req, res) => {
-    const dniBuscado = req.params.dni;
+    const dni = ValidacionesHelper.getStringOrDefault(req.params.dni, "");
 
-    const alumno = alumnosArray.find(a => a.dni === dniBuscado);
-
-    if (alumno) {
-        return res.status(200).json(alumno);
+    if (dni === "") {
+        return res.status(400).send("dni obligatorio");
     }
 
-    return res.status(404).json({ error: "Alumno no encontrado" });
+    const alumno = alumnosArray.find(a => a.dni === dni);
+
+    if (!alumno) {
+        return res.status(404).json({ error: "Alumno no encontrado" });
+    }
+
+    res.status(200).json(alumno);
 });
 
 app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
 app.post("/alumnos", (req, res) => {
-    const { username, dni, edad } = req.body;
+    const username = ValidacionesHelper.getStringOrDefault(req.body?.username, "");
+    const dni      = ValidacionesHelper.getStringOrDefault(req.body?.dni, "");
+    const edad     = ValidacionesHelper.getIntegerOrDefault(req.body?.edad, 0);
 
-    if (!username || !dni || edad === undefined) {
-        return res.status(400).json({ error: "Faltan datos" });
+    if (username === "" || dni === "" || edad <= 0) {
+        return res.status(400).send("username, dni y edad son obligatorios");
     }
 
     const existe = alumnosArray.find(a => a.dni === dni);
+
     if (existe) {
-        return res.status(400).json({ error: "El alumno ya existe" });
+        return res.status(400).send("El alumno ya existe");
     }
 
     const nuevoAlumno = new Alumno(username, dni, edad);
     alumnosArray.push(nuevoAlumno);
 
-    return res.status(201).json(nuevoAlumno);
+    res.status(201).json(nuevoAlumno);
 });
 
-app.use(express.json());
+
 app.delete("/alumnos", (req, res) => {
-    const { dni } = req.body;
+    const dni = ValidacionesHelper.getStringOrDefault(req.body?.dni, "");
+
+    if (dni === "") {
+        return res.status(400).send("dni obligatorio");
+    }
 
     const index = alumnosArray.findIndex(a => a.dni === dni);
 
@@ -192,5 +219,5 @@ app.delete("/alumnos", (req, res) => {
 
     alumnosArray.splice(index, 1);
 
-    return res.status(200).json({ mensaje: "Alumno eliminado" });
+    res.status(200).json({ mensaje: "Alumno eliminado" });
 });
