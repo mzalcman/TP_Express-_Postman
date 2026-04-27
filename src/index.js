@@ -221,3 +221,80 @@ app.delete("/alumnos", (req, res) => {
 
     res.status(200).json({ mensaje: "Alumno eliminado" });
 });
+
+
+// ===============================
+// FECHAS - ENDPOINTS TP04
+// ===============================
+
+
+// 1) /fechas/isDate?fecha=2024-04-12
+app.get("/fechas/isDate", (req, res) => {
+    const fecha = ValidacionesHelper.getDateOrDefault(req.query.fecha, null);
+
+    if (!DateTimeHelper.isDate(fecha)) {
+        return res.status(400).send("Fecha inválida");
+    }
+
+    res.status(200).json({
+        valido: true
+    });
+});
+
+
+// 2) /fechas/getEdadActual?fechaNacimiento=1972-07-13
+app.get("/fechas/getEdadActual", (req, res) => {
+    const fechaNacimiento = ValidacionesHelper.getDateOrDefault(req.query.fechaNacimiento, null);
+
+    if (!DateTimeHelper.isDate(fechaNacimiento)) {
+        return res.status(400).send("Fecha inválida");
+    }
+
+    res.status(200).json({
+        edad: DateTimeHelper.getEdadActual(fechaNacimiento)
+    });
+});
+
+
+// 3) /fechas/getDiasHastaMiCumple?fechaNacimiento=1972-07-13
+app.get("/fechas/getDiasHastaMiCumple", (req, res) => {
+    const fechaNacimiento = ValidacionesHelper.getDateOrDefault(req.query.fechaNacimiento, null);
+
+    if (!DateTimeHelper.isDate(fechaNacimiento)) {
+        return res.status(400).send("Fecha inválida");
+    }
+
+    res.status(200).json({
+        diasRestantes: DateTimeHelper.getDiasHastaMiCumple(fechaNacimiento)
+    });
+});
+
+
+// 4) /fechas/getDiaTexto?fecha=2024-04-13&abr=true
+app.get("/fechas/getDiaTexto", (req, res) => {
+    const fecha = ValidacionesHelper.getDateOrDefault(req.query.fecha, null);
+    const abr   = ValidacionesHelper.getBooleanOrDefault(req.query.abr, false);
+
+    if (!DateTimeHelper.isDate(fecha)) {
+        return res.status(400).send("Fecha inválida");
+    }
+
+    res.status(200).json({
+        dia: DateTimeHelper.getDiaTexto(fecha, abr)
+    });
+});
+
+
+// 5) /fechas/getMesTexto?fecha=2024-04-13&abr=true
+app.get("/fechas/getMesTexto", (req, res) => {
+    const fecha = ValidacionesHelper.getDateOrDefault(req.query.fecha, null);
+    const abr   = ValidacionesHelper.getBooleanOrDefault(req.query.abr, false);
+
+    if (!DateTimeHelper.isDate(fecha)) {
+        return res.status(400).send("Fecha inválida");
+    }
+
+    res.status(200).json({
+        mes: DateTimeHelper.getMesTexto(fecha, abr)
+    });
+});
