@@ -223,12 +223,6 @@ app.delete("/alumnos", (req, res) => {
 });
 
 
-// ===============================
-// FECHAS - ENDPOINTS TP04
-// ===============================
-
-
-// 1) /fechas/isDate?fecha=2024-04-12
 app.get("/fechas/isDate", (req, res) => {
     const fecha = ValidacionesHelper.getDateOrDefault(req.query.fecha, null);
 
@@ -242,7 +236,6 @@ app.get("/fechas/isDate", (req, res) => {
 });
 
 
-// 2) /fechas/getEdadActual?fechaNacimiento=1972-07-13
 app.get("/fechas/getEdadActual", (req, res) => {
     const fechaNacimiento = ValidacionesHelper.getDateOrDefault(req.query.fechaNacimiento, null);
 
@@ -256,7 +249,6 @@ app.get("/fechas/getEdadActual", (req, res) => {
 });
 
 
-// 3) /fechas/getDiasHastaMiCumple?fechaNacimiento=1972-07-13
 app.get("/fechas/getDiasHastaMiCumple", (req, res) => {
     const fechaNacimiento = ValidacionesHelper.getDateOrDefault(req.query.fechaNacimiento, null);
 
@@ -270,7 +262,6 @@ app.get("/fechas/getDiasHastaMiCumple", (req, res) => {
 });
 
 
-// 4) /fechas/getDiaTexto?fecha=2024-04-13&abr=true
 app.get("/fechas/getDiaTexto", (req, res) => {
     const fecha = ValidacionesHelper.getDateOrDefault(req.query.fecha, null);
     const abr   = ValidacionesHelper.getBooleanOrDefault(req.query.abr, false);
@@ -285,7 +276,6 @@ app.get("/fechas/getDiaTexto", (req, res) => {
 });
 
 
-// 5) /fechas/getMesTexto?fecha=2024-04-13&abr=true
 app.get("/fechas/getMesTexto", (req, res) => {
     const fecha = ValidacionesHelper.getDateOrDefault(req.query.fecha, null);
     const abr   = ValidacionesHelper.getBooleanOrDefault(req.query.abr, false);

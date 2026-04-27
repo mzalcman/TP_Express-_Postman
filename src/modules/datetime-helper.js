@@ -46,7 +46,7 @@ class DateTimeHelper {
   getDiaTexto = (fecha, abr = false) => {
     if (!this.isDate(fecha)) return null;
 
-    const dias = ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"];
+    const dias = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"];
     const dia = dias[fecha.getDay()];
 
     return abr ? dia.substring(0, 3) : dia;
